@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D. Sai Charish Reddy - Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --sidebar-bg: #242424;
+            --text-color: #ffffff;
+            --accent-color: #ffd700;
+            --card-bg: #2a2a2a;
+            --nav-bg: rgba(42, 42, 42, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background: var(--sidebar-bg);
+            width: 300px;
+            padding: 2rem;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .sidebar h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar .title {
+            color: #888;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .contact-item i {
+            color: var(--accent-color);
+            width: 20px;
+        }
+
+        .social-links {
+            margin-top: auto;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 300px;
+            flex-grow: 1;
+            padding: 2rem;
+            max-width: calc(100% - 300px);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--nav-bg);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            justify-content: flex-end;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        nav a.active {
+            color: var(--accent-color);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Content Sections */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .yellow-line {
+            width: 50px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 1rem 0 2rem 0;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .project-meta {
+            margin-bottom: 1rem;
+            color: #888;
+        }
+
+        .project-description h4 {
+            color: var(--accent-color);
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .project-description ul {
+            list-style-position: inside;
+            margin-bottom: 1rem;
+        }
+
+        /* Skills Tags */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1rem;
+            }
+
+            .main-content {
+                margin-left: 0;
+                max-width: 100%;
+                padding: 1rem;
+            }
+
+            nav {
+                justify-content: center;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-links {
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+<div class="sidebar">
+    <h1>D. Sai Charish Reddy</h1>
+    <div class="title">Computer Science Engineer</div>
+    
+    <div class="contact-info">
+        <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>duvvuru.charish@gmail.com</span>
+        </div>
+        <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+91 7013805539</span>
+        </div>
+        <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Hyderabad, Telangana</span>
+        </div>
+    </div>
+
+    <div class="social-links">
+        <a href="https://github.com/CharishDuvvuru2003" target="_blank">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/sai-charish-reddy-duvvuru-3bb84324b/" target="_blank">
+            <i class="fab fa-linkedin"></i>
+        </a>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <nav>
+        <a href="#about" class="nav-link active">About</a>
+        <a href="#resume" class="nav-link">Resume</a>
+        <a href="#projects" class="nav-link">Projects</a>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about-section" class="section active">
+        <h2>About Me</h2>
+        <div class="yellow-line"></div>
+        <div class="card">
+            <p>Motivated and analytical Engineering student with a solid foundation in Computer science engineering, eager to apply theoretical knowledge to real-world applications through an internship role.</p>
+            <br>
+            <p>Proficient in various technical skills and experience in collaborative project work. Strong problem-solving abilities, attention to detail, and a commitment to continuous learning. Ready to contribute to innovative engineering projects and gain practical industry experience.</p>
+        </div>
+
+        <h2 style="margin-top: 3rem;">What I Do</h2>
+        <div class="yellow-line"></div>
+        <div class="card-grid">
+            <div class="card">
+                <div style="font-size: 2rem; color: var(--accent-color); margin-bottom: 1rem;">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Full Stack Development</h3>
+                <p>Building complete web applications using modern technologies and frameworks.</p>
+            </div>
+            <div class="card">
+                <div style="font-size: 2rem; color: var(--accent-color); margin-bottom: 1rem;">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <h3>Cloud Computing</h3>
+                <p>Experience with AWS services including EC2, S3, IAM, VPC, and more.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume-section" class="section">
+        <h2>Resume</h2>
+        <div class="yellow-line"></div>
+
+        <h3 style="margin-bottom: 1.5rem;">Work Experience</h3>
+        <div class="card">
+            <h3>Cloud Intern - Stellantis</h3>
+            <p style="color: #888;">Aug 2023–Dec 2023</p>
+            <ul style="margin-top: 1rem; list-style-position: inside;">
+                <li>Gained hands-on experience with EC2 instances and S3 buckets</li>
+                <li>Created IAM roles for users</li>
+                <li>EC2 instance management</li>
+                <li>VPC and Internet Gateway configuration</li>
+                <li>SNS implementation</li>
+            </ul>
+        </div>
+
+        <h3 style="margin: 2rem 0 1.5rem;">Skills</h3>
+        <div class="card-grid">
+            <div class="card">
+                <h3>Programming Languages</h3>
+                <div class="skills-container">
+                    <span class="skill-tag">JAVA</span>
+                    <span class="skill-tag">PYTHON</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">NoSQL</span>
+                    <span class="skill-tag">JavaScript</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Technologies & Frameworks</h3>
+                <div class="skills-container">
+                    <span class="skill-tag">HTML</span>
+                    <span class="skill-tag">CSS</span>
+                    <span class="skill-tag">React.js</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Express.js</span>
+                    <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">Git</span>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="margin: 2rem 0 1.5rem;">Education</h3>
+        <div class="card-grid">
+            <div class="card">
+                <h3>Vellore Institute of Technology</h3>
+                <p>B. Tech in Computer Science Engineering</p>
+                <p style="color: #888;">CGPA: 8.17/10 | 2021–2025</p>
+            </div>
+            <div class="card">
+                <h3>Fiitjee Junior College</h3>
+                <p>Intermediate/+2</p>
+                <p style="color: #888;">Marks: 870/1000 | 2019–2021</p>
+            </div>
+        </div>
+
+        <h3 style="margin: 2rem 0 1.5rem;">Certifications</h3>
+        <div class="card">
+            <h3>Full Stack Development Certification</h3>
+            <p>Imarticus Learning</p>
+            <ul style="margin-top: 1rem; list-style-position: inside;">
+                <li>Comprehensive training in full-stack web development</li>
+                <li>Covered front-end, back-end, and database technologies</li>
+                <li>Hands-on experience with real-world projects</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects-section" class="section">
+        <h2>Projects</h2>
+        <div class="yellow-line"></div>
+        
+        <div class="project-card">
+            <h3>Sign Language Recognition</h3>
+            <div class="project-meta">
+                <span><i class="fas fa-calendar"></i> Duration: 3 months</span>
+                <span style="margin-left: 1rem;"><i class="fas fa-users"></i> Team Size: 3 members</span>
+            </div>
+            
+            <div class="project-description">
+                <h4>Project Overview</h4>
+                <p>Developed a real-time sign language recognition system that translates hand gestures into text, bridging communication gaps between hearing-impaired and non-hearing-impaired individuals.</p>
+                
+                <h4>Key Features</h4>
+                <ul>
+                    <li>Real-time hand gesture recognition with 95% accuracy</li>
+                    <li>Translation support for English alphabets to Hindi</li>
+                    <li>Optimized CNN model for low-latency processing</li>
+                    <li>User-friendly web interface using Flask</li>
+                </ul>
+
+                <h4>Technical Implementation</h4>
+                <ul>
+                    <li>Implemented CNN architecture using TensorFlow and Keras</li>
+                    <li>Used OpenCV for real-time video processing and frame extraction</li>
+                    <li>Developed RESTful API endpoints using Flask</li>
+                    <li>Implemented data augmentation techniques to improve model accuracy</li>
+                </ul>
+            </div>
+            
+            <div class="skills-container">
+                <span class="skill-tag">CNN</span>
+                <span class="skill-tag">Flask</span>
+                <span class="skill-tag">OpenCV</span>
+                <span class="skill-tag">TensorFlow</span>
+                <span class="skill-tag">Keras</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">REST API</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3>Traffic Flow Prediction</h3>
+            <div class="project-meta">
+                <span><i class="fas fa-calendar"></i> Duration: 2.5 months</span>
+                <span style="margin-left: 1rem;"><i class="fas fa-users"></i> Team Size: 2 members</span>
+            </div>
+            
+            <div class="project-description">
+                <h4>Project Overview</h4>
+                <p>Created an intelligent traffic prediction system using advanced deep learning techniques to forecast traffic patterns and help optimize urban transportation systems.</p>
+                
+                <h4>Key Features</h4>
+                <ul>
+                    <li>Short-term (15-30 minutes) and long-term (1-24 hours) traffic predictions</li>
+                    <li>Real-time data processing capabilities</li>
+                    <li>Interactive visualization dashboard</li>
+                    <li>Multi-variable analysis including weather and event data</li>
+                </ul>
+
+                <h4>Technical Implementation</h4>
+                <ul>
+                    <li>Developed hybrid GRU-LSTM model for improved prediction accuracy</li>
+                    <li>Implemented data preprocessing pipeline for handling time-series data</li>
+                    <li>Created interactive visualizations using Plotly and Dash</li>
+                    <li>Achieved 92% prediction accuracy on test datasets</li>
+                </ul>
+            </div>
+
+            <div class="skills-container">
+                <span class="skill-tag">GRU</span>
+                <span class="skill-tag">LSTM</span>
+                <span class="skill-tag">Neural Networks</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Pandas</span>
+                <span class="skill-tag">Plotly</span>
+                <span class="skill-tag">Dash</span>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+    // Get all navigation links and sections
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.section');
+
+    // Function to show selected section
+    function showSection(sectionId) {
+        // Remove active class from all sections and links
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            setTimeout(() => {
+                section.classList.remove('active');
+            }, 300);
+        });
+        navLinks.forEach(link => link.classList.remove('active'));
+
+        // Add active class to current section and link
+        const currentSection = document.getElementById(`${sectionId}-section`);
+        const currentLink = document.querySelector(`a[href="#${sectionId}"]`);
+        
+        if (currentSection && currentLink) {
+            setTimeout(() => {
+                currentSection.classList.add('active');
+                currentSection.style.opacity = '1';
+            }, 300);
+            currentLink.classList.add('active');
+        }
+    }
+
+    // Add click event listeners to navigation links
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const sectionId = link.getAttribute('href').substring(1);
+            showSection(sectionId);
+            history.pushState(null, '', `#${sectionId}`);
+        });
+    });
+
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', () => {
+        const hash = window.location.hash.substring(1) || 'about';
+        showSection(hash);
+    });
+
+    // Show initial section based on URL hash
+    const initialHash = window.location.hash.substring(1) || 'about';
+    showSection(initialHash);
+</script>
+</body>
+</html>
